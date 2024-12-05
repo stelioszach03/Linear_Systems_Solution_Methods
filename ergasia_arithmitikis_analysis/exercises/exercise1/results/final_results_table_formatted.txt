@@ -1,0 +1,59 @@
+Linear System Solutions - Results Table
+=====================================
+
+Metrics Definitions:
+------------------
+1. Error: \[\frac{\| \delta x \|_\infty}{\| x \|_\infty}\] where δx = x_computed - x_exact
+2. Residual: \[\frac{\| \delta r \|_\infty}{\| x \|_\infty}\] where δr = b - Ax_computed
+3. Condition Number: \[\kappa(A) = \|A\|_\infty \|A^{-1}\|_\infty\]
+
+Results Table:
+-------------
+| Application | Error                | Residual             | Condition Number     |
+|-------------|---------------------|---------------------|---------------------|
+| 1           | 6.661338e-16        | 2.732857e-16        | 3.291161e+01        |
+| 2           | 1.409292e-07        | 1.399756e-15        | 3.387279e+10        |
+| 3           | 4.440892e-16        | 1.110223e-16        | 2.400163e+01        |
+
+Application Details:
+------------------
+1. Given 8×8 matrix A as specified in the problem
+2. Hilbert matrix where a_{ij} = \frac{1}{i+j-1}, i,j = 1,2,\ldots,8
+3. Tridiagonal symmetric matrix with:
+   - Main diagonal elements = 4
+   - Lower subdiagonal elements = -1
+   - Upper subdiagonal elements = -3
+
+Metric Calculations:
+------------------
+For each application:
+1. Error calculation:
+   - Computed ‖δx‖∞ = max|x_computed - x_exact|
+   - Normalized by ‖x‖∞ = max|x_exact| = 1
+
+2. Residual calculation:
+   - Computed ‖δr‖∞ = max|b - Ax_computed|
+   - Normalized by ‖x‖∞ = 1
+
+3. Condition number:
+   - Computed using infinity norm
+   - κ(A) = ‖A‖∞ · ‖A^{-1}‖∞
+
+Analysis:
+--------
+1. Application 1 (Given 8×8 Matrix):
+   - Achieved near machine precision (≈10^-16)
+   - Well-conditioned system (κ ≈ 32.9)
+   - Stable solution with minimal error propagation
+
+2. Application 2 (Hilbert Matrix):
+   - Higher error (≈10^-7) due to ill-conditioning
+   - Very high condition number (κ ≈ 3.39×10^10)
+   - Demonstrates impact of matrix conditioning on solution accuracy
+
+3. Application 3 (Tridiagonal Symmetric):
+   - Excellent accuracy (≈10^-16)
+   - Well-conditioned system (κ ≈ 24.0)
+   - Demonstrates stability of Jordan method for structured matrices
+
+Note: All calculations performed using Jordan method with partial pivoting, ensuring numerical stability through proper pivot selection and row operations.

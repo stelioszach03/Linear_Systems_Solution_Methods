@@ -1,0 +1,51 @@
+Execution Time Comparison Analysis
+================================
+
+Test Configuration
+-----------------
+- Matrix sizes tested: 100, 1000
+- Number of trials per test: 10
+- Matrix properties: Tridiagonal symmetric
+  * Main diagonal: 4
+  * Lower subdiagonal: -1
+  * Upper subdiagonal: -3
+- Test vector: x = (1,1,...,1)^T
+- System: Ax = b where b = Ax
+
+Detailed Results
+---------------
+
+n = 100
+-------
+Thomas Method:
+- Average execution time: 0.000168 seconds
+- Standard deviation: ±0.000011 seconds
+- Solution error: 5.55e-16
+
+Gaussian Elimination:
+- Average execution time: 0.012829 seconds
+- Standard deviation: ±0.000115 seconds
+- Solution error: 6.66e-16
+
+Speedup factor: 76.53×
+
+n = 1000
+--------
+Thomas Method:
+- Average execution time: 0.001756 seconds
+- Standard deviation: ±0.000055 seconds
+- Solution error: 5.55e-16
+
+Gaussian Elimination:
+- Average execution time: 1.539895 seconds
+- Standard deviation: ±0.012258 seconds
+- Solution error: 6.66e-16
+
+Speedup factor: 877.11×
+
+Summary Table
+------------
+Size (n) | Thomas (s) | Gaussian (s) | Speedup
+---------|-----------:|-------------:|--------
+     100 |  0.000168 |    0.012829 |  76.53×
+    1000 |  0.001756 |    1.539895 | 877.11×

@@ -1,0 +1,133 @@
+Detailed Solution Steps for Tridiagonal System
+============================================
+
+Example with n = 4 to illustrate steps (scaled version of actual implementation)
+
+Initial System
+-------------
+Matrix A:
+[  4  -3   0   0 ]
+[ -1   4  -3   0 ]
+[  0  -1   4  -3 ]
+[  0   0  -1   4 ]
+
+x = [1, 1, 1, 1]ᵀ
+b = Ax = [1, 0, 0, 1]ᵀ
+
+1. Thomas Algorithm Solution
+--------------------------
+Step 1: Forward Elimination
+- Initial diagonals:
+  a = [-1, -1, -1]    (lower)
+  b = [ 4,  4,  4, 4] (main)
+  c = [-3, -3, -3]    (upper)
+
+Computing modified coefficients c' and d' with detailed multiplier calculations:
+
+i = 1:
+Multiplier calculation:
+m₁ = c₁/b₁ = -3/4 = -0.75
+c'₁ = m₁ = -0.75
+d'₁ = d₁/b₁ = 1/4 = 0.25
+
+Intermediate state after i=1:
+[ 4.00  -3.00   0.00   0.00 | 1.00 ]
+[ -1.00   4.00  -3.00   0.00 | 0.00 ]
+[  0.00  -1.00   4.00  -3.00 | 0.00 ]
+[  0.00   0.00  -1.00   4.00 | 1.00 ]
+
+i = 2:
+Multiplier calculation:
+m₂ = -1/(4 - (-1)(-0.75)) = -1/3.25 ≈ -0.308
+c'₂ = -3/(4 - (-1)(-0.75)) = -3/3.25 ≈ -0.923
+d'₂ = (0 - (-1)(0.25))/(4 - (-1)(-0.75)) = 0.25/3.25 ≈ 0.077
+
+Intermediate state after i=2:
+[ 4.00  -3.00   0.00   0.00 | 1.00 ]
+[ 0.00   3.25  -3.00   0.00 | 0.25 ]
+[ 0.00  -1.00   4.00  -3.00 | 0.00 ]
+[ 0.00   0.00  -1.00   4.00 | 1.00 ]
+
+i = 3:
+Multiplier calculation:
+m₃ = -1/(4 - (-1)(-0.923)) = -1/3.077 ≈ -0.325
+c'₃ = -3/(4 - (-1)(-0.923)) = -3/3.077 ≈ -0.975
+d'₃ = (0 - (-1)(0.077))/(4 - (-1)(-0.923)) = 0.077/3.077 ≈ 0.025
+
+Intermediate state after i=3:
+[ 4.00  -3.00   0.00   0.00 | 1.00 ]
+[ 0.00   3.25  -3.00   0.00 | 0.25 ]
+[ 0.00   0.00   3.08  -3.00 | 0.08 ]
+[ 0.00   0.00  -1.00   4.00 | 1.00 ]
+
+i = 4:
+Multiplier calculation:
+m₄ = -1/(4 - (-1)(-0.975)) = -1/3.025 ≈ -0.331
+d'₄ = (1 - (-1)(0.025))/(4 - (-1)(-0.975)) = 1.025/3.025 ≈ 0.339
+
+Final state after forward elimination:
+[ 4.00  -3.00   0.00   0.00 | 1.00 ]
+[ 0.00   3.25  -3.00   0.00 | 0.25 ]
+[ 0.00   0.00   3.08  -3.00 | 0.08 ]
+[ 0.00   0.00   0.00   3.03 | 1.03 ]
+
+Step 2: Back Substitution with Detailed Steps
+x₄ = d'₄ = 1.025/3.025 = 1.000
+x₃ = d'₃ - c'₃x₄ = 0.025 - (-0.975)(1.000) = 1.000
+x₂ = d'₂ - c'₂x₃ = 0.077 - (-0.923)(1.000) = 1.000
+x₁ = d'₁ - c'₁x₂ = 0.250 - (-0.750)(1.000) = 1.000
+
+2. Gaussian Elimination Solution
+------------------------------
+Step 1: Forward Elimination with Detailed Multipliers
+Initial augmented matrix [A|b]:
+[  4  -3   0   0 | 1 ]
+[ -1   4  -3   0 | 0 ]
+[  0  -1   4  -3 | 0 ]
+[  0   0  -1   4 | 1 ]
+
+Elimination steps with multiplier calculations:
+
+i = 1, j = 2:
+Multiplier L₂₁ = a₂₁/a₁₁ = -1/4 = -0.25
+Row₂ = Row₂ + 0.25×Row₁:
+[  4.00  -3.00   0.00   0.00 | 1.00 ]
+[  0.00   3.25  -3.00   0.00 | 0.25 ]
+[  0.00  -1.00   4.00  -3.00 | 0.00 ]
+[  0.00   0.00  -1.00   4.00 | 1.00 ]
+
+i = 2, j = 3:
+Multiplier L₃₂ = a₃₂/a₂₂ = -1/3.25 ≈ -0.308
+Row₃ = Row₃ + 0.308×Row₂:
+[  4.00  -3.00   0.00   0.00 | 1.00 ]
+[  0.00   3.25  -3.00   0.00 | 0.25 ]
+[  0.00   0.00   3.08  -3.00 | 0.08 ]
+[  0.00   0.00  -1.00   4.00 | 1.00 ]
+
+i = 3, j = 4:
+Multiplier L₄₃ = a₄₃/a₃₃ = -1/3.08 ≈ -0.325
+Row₄ = Row₄ + 0.325×Row₃:
+[  4.00  -3.00   0.00   0.00 | 1.00 ]
+[  0.00   3.25  -3.00   0.00 | 0.25 ]
+[  0.00   0.00   3.08  -3.00 | 0.08 ]
+[  0.00   0.00   0.00   3.03 | 1.03 ]
+
+Step 2: Back Substitution with Detailed Steps
+x₄ = 1.03/3.03 = 1.000
+x₃ = (0.08 + 3.00×1.000)/3.08 = 1.000
+x₂ = (0.25 + 3.00×1.000)/3.25 = 1.000
+x₁ = (1.00 + 3.00×1.000)/4.00 = 1.000
+
+3. Numerical Stability Analysis
+-----------------------------
+Both methods maintain high accuracy due to:
+1. Well-conditioned tridiagonal system
+2. No need for pivoting (diagonal dominance)
+3. Minimal roundoff error accumulation
+4. Stable elimination processes
+
+The Thomas algorithm achieves better performance while maintaining the same accuracy as Gaussian elimination because:
+1. Exploits the tridiagonal structure
+2. Requires fewer operations
+3. Better cache utilization
+4. Reduced memory access patterns

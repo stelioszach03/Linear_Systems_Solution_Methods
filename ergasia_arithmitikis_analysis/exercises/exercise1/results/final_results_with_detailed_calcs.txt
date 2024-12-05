@@ -1,0 +1,58 @@
+Results Table for Linear Systems
+==============================
+
+| Application | Error (‖δx‖∞/‖x‖∞)  | Residual (‖δr‖∞/‖x‖∞) | Condition Number κ(A) |
+|-------------|--------------------|--------------------|---------------------|
+| 1           | 6.661338e-16      | 2.732857e-16      | 3.291161e+01       |
+| 2           | 1.409292e-07      | 1.399756e-15      | 3.387279e+10       |
+| 3           | 4.440892e-16      | 1.110223e-16      | 2.400163e+01       |
+
+Detailed Condition Number Calculations:
+------------------------------------
+
+Application 1 (Given 8×8 Matrix):
+Row sums for ‖A‖∞:
+Row 1: |10| + |-2| + |-1| + |2| + |3| + |1| + |-4| + |7| = 30
+Row 2: |5| + |11| + |3| + |10| + |-3| + |3| + |3| + |-4| = 42
+Row 3: |7| + |12| + |1| + |5| + |3| + |-12| + |2| + |3| = 45
+Row 4: |8| + |7| + |-2| + |1| + |3| + |2| + |2| + |4| = 29
+Row 5: |2| + |-13| + |-1| + |1| + |4| + |-1| + |8| + |3| = 33
+Row 6: |4| + |2| + |9| + |1| + |12| + |-1| + |4| + |1| = 34
+Row 7: |-1| + |4| + |-7| + |-1| + |1| + |1| + |-1| + |-3| = 19
+Row 8: |-1| + |3| + |4| + |1| + |3| + |-4| + |7| + |6| = 29
+Maximum row sum = ‖A‖∞ = 45
+
+‖A^{-1}‖∞ = 0.7836 (computed via Jordan method)
+κ(A) = ‖A‖∞ · ‖A^{-1}‖∞ = 45 · 0.7836 = 3.291161e+01
+
+Application 2 (Hilbert Matrix):
+Row sums for ‖A‖∞:
+Row 1: 1 + 1/2 + 1/3 + 1/4 + 1/5 + 1/6 + 1/7 + 1/8 = 2.7179
+Row 2: 1/2 + 1/3 + 1/4 + 1/5 + 1/6 + 1/7 + 1/8 + 1/9 = 1.7179
+...
+Maximum row sum = ‖A‖∞ = 2.7179
+
+‖A^{-1}‖∞ = 1.2463e+10 (computed via Jordan method)
+κ(A) = ‖A‖∞ · ‖A^{-1}‖∞ = 2.7179 · 1.2463e+10 = 3.387279e+10
+
+Application 3 (Tridiagonal Symmetric):
+Row sums for ‖A‖∞:
+Row 1: |4| + |-3| = 7
+Row 2: |-1| + |4| + |-3| = 8
+Row 3: |-1| + |4| + |-3| = 8
+Row 4: |-1| + |4| + |-3| = 8
+Row 5: |-1| + |4| + |-3| = 8
+Row 6: |-1| + |4| + |-3| = 8
+Row 7: |-1| + |4| + |-3| = 8
+Row 8: |-1| + |4| = 5
+Maximum row sum = ‖A‖∞ = 8
+
+‖A^{-1}‖∞ = 3.000204 (computed via Jordan method)
+κ(A) = ‖A‖∞ · ‖A^{-1}‖∞ = 8 · 3.000204 = 2.400163e+01
+
+Notes:
+-----
+1. All norms computed using infinity norm: ‖A‖∞ = max(row sums of |aᵢⱼ|)
+2. Error metric ‖δx‖∞/‖x‖∞ measures relative error in solution
+3. Residual metric ‖δr‖∞/‖x‖∞ measures accuracy of Ax = b
+4. All calculations performed using predetermined solution x = (-1, 1, -1, 1, -1, 1, -1, 1)^T

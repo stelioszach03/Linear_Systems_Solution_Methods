@@ -1,0 +1,29 @@
+Timing Comparison Plots Description
+=================================
+
+1. Execution Times (Log Scale)
+----------------------------
+- Shows actual execution times for both methods
+- Logarithmic scale reveals exponential difference in performance
+- Thomas method shows near-linear scaling
+- Gaussian elimination shows polynomial scaling
+
+2. Speedup Factor
+----------------
+- Displays the ratio of Gaussian to Thomas execution times
+- Shows increasing advantage of Thomas method with problem size
+- Speedup ranges from 76.36× to 876.93×
+
+3. Theoretical Operation Count
+--------------------------
+- Compares theoretical operation counts
+- Thomas method: O(n) operations
+- Gaussian elimination: O(n³) operations
+- Logarithmic scales show clear complexity difference
+
+4. Time Complexity Validation
+---------------------------
+- Normalized timing data compared to theoretical complexity
+- Shows how well actual performance matches theory
+- Thomas method closely follows O(n) line
+- Gaussian elimination follows O(n³) trend

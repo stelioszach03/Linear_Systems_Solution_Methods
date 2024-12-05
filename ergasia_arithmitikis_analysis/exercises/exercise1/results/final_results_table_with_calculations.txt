@@ -1,0 +1,62 @@
+Linear System Solutions - Detailed Results Table
+=============================================
+
+Results Table:
+-------------
+| Application | Error (‖δx‖∞/‖x‖∞)  | Residual (‖δr‖∞/‖x‖∞) | Condition Number κ(A) |
+|-------------|--------------------|--------------------|---------------------|
+| 1           | 6.661338e-16      | 2.732857e-16      | 3.291161e+01       |
+| 2           | 1.409292e-07      | 1.399756e-15      | 3.387279e+10       |
+| 3           | 4.440892e-16      | 1.110223e-16      | 2.400163e+01       |
+
+Detailed Calculations:
+--------------------
+
+Application 1 (Given 8×8 Matrix):
+- Matrix norm ‖A‖∞ = max(row sums) = max{30, 42, 35, 29, 31, 34, 19, 29} = 42
+- Inverse norm ‖A^{-1}‖∞ = 0.7836
+- Condition number κ(A) = ‖A‖∞ · ‖A^{-1}‖∞ = 42 · 0.7836 = 3.291161e+01
+
+Application 2 (Hilbert Matrix):
+- Matrix norm ‖A‖∞ = 2.7179
+- Inverse norm ‖A^{-1}‖∞ = 1.2463e+10
+- Condition number κ(A) = 2.7179 · 1.2463e+10 = 3.387279e+10
+Note: High condition number indicates severe ill-conditioning
+
+Application 3 (Tridiagonal Symmetric):
+- Matrix norm ‖A‖∞ = max(|4| + |-1| + |-3|) = 8
+- Inverse norm ‖A^{-1}‖∞ = 3.000204
+- Condition number κ(A) = 8 · 3.000204 = 2.400163e+01
+
+Error Metric Details:
+-------------------
+For all applications, using predetermined solution x = (-1, 1, -1, 1, -1, 1, -1, 1)^T:
+
+1. Error calculation (‖δx‖∞/‖x‖∞):
+   - Numerator ‖δx‖∞ = max|x_computed - x_exact|
+   - Denominator ‖x‖∞ = max|x_exact| = 1
+
+2. Residual calculation (‖δr‖∞/‖x‖∞):
+   - Numerator ‖δr‖∞ = max|b - Ax_computed|
+   - Denominator ‖x‖∞ = 1
+
+Analysis of Results:
+------------------
+1. Application 1 (Given 8×8 Matrix):
+   - Moderate condition number indicates good numerical stability
+   - Error and residual at machine precision level
+   - Solution highly accurate due to good conditioning
+
+2. Application 2 (Hilbert Matrix):
+   - Extremely high condition number (≈10^10) indicates severe ill-conditioning
+   - Error significantly larger than other applications
+   - Demonstrates how ill-conditioning affects solution accuracy
+   - Residual remains good despite poor conditioning
+
+3. Application 3 (Tridiagonal Symmetric):
+   - Lowest condition number among all applications
+   - Error and residual at machine precision level
+   - Special structure contributes to numerical stability
+   - Demonstrates effectiveness of Jordan method for well-structured matrices
+
+Note: All calculations performed using double precision arithmetic (≈16 decimal digits)
